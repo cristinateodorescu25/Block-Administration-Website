@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>
+        Admin Page
+    </title>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg fixed-top">  
+    <!-- <a class="nav-link" data-value="home" href="home.html">Home</a> -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
+    <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
+    <li>
+        <a class="nav-link" data-value="home" href="home.html">Home</a>
+    </li>
+    </ul> 
+    </div>
+</nav>
+
+<div class="container-fluid">
+    <div class="dashboard">
+        <div class="row">
+            <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
+                <div class="dashboard_s">
+                    <section class="wrapper">
+                    <div class="h">
+
+                        <div class="d-flex justify-content-end day_icon">
+                            <span><i class="fab fa-odnoklassniki-square"></i></span>
+                        </div>
+    
+                        <div class="title_s"> Day with most users </div>
+                        <div class="subtitle_s">
+                            <div id="day_most_users" class="number"> 
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="f">
+                        <i>View chart for progress</i>
+                    </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
+                <div class="dashboard_s">
+                    <section class="wrapper">
+                    <div class="h">
+
+                        <div class="d-flex justify-content-end user_icon">
+                            <span><i class="fas fa-external-link-square-alt"></i></span>
+                        </div>
+    
+                        <div class="title_s"> Top user </div>
+                        <div class="subtitle_s">
+                            <div id="top_user" class="number"> 
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="f">
+                        <i>Based on message activities</i>
+                    </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
+                <div class="dashboard_s">
+                    <section class="wrapper">
+                        <div class="h">
+    
+                            <div class="d-flex justify-content-end total_user_icon">
+                                <span><i class="fas fa-check-square"></i></span>
+                            </div>
+        
+                            <div class="title_s"> Total users </div>
+                            <div class="subtitle_s">
+                                <div id="total_users" class="number"> 
+                                </div>
+                            </div>
+    
+                        </div>
+                        <div class="f">
+                            <i>Out of total 20 possible users</i>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
+                <div class="dashboard_s">
+                    <section class="wrapper">
+                    <div class="h">
+
+                        <div class="d-flex justify-content-end message_icon">
+                                <span><i class="fas fa-envelope-square"></i></span>
+                            </div>
+    
+                            <div class="title_s"> Contact inbox </div>
+                            <div class="subtitle_s">
+                                <div id="contact_messages" class="number"> 
+                                    </div>
+                                <span class="explanation">messages</span> 
+    
+                            </div>
+
+                    </div>
+                    <div class="f">
+                        <i>Total messages in Contact dashboard</i>
+                    </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
+                <div class="chart-container">
+                    <canvas id="top-user-chart" width="300" height="168.75"></canvas>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
+                <div class="chart-container">
+                    <canvas id="user-page-chart" width="300" height="168.75"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
+                <div class="chart-container">
+                    <canvas id="userperday-chart" width="300" height="168.75"></canvas>
+                </div>   
+            </div>
+            <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
+                y
+            </div>
+        </div>
+
+    </div>
+
+    <br>
+
+    <div class="container">
+
+            <div id="contact_carousel" class="carousel slide carousel-fade" data-ride="carousel">
+                
+            </div>
+    </div>
+
+    <br><br><br>
+
+</div>
+
+<script type="text/javascript" src='js/admin.js'></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+
+</body>
+</html>
