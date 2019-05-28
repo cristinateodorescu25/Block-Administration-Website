@@ -6,12 +6,15 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>
         Admin Page
     </title>
     <link rel="stylesheet" href="admin.css">
+        
+    <script src='js/admin.js'></script>
 
 </head>
 <body>
@@ -34,7 +37,7 @@
         <div class="row">
             <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
                 <div class="dashboard_s">
-                    <section class="wrapper">
+                    <div class="wrapper">
                     <div class="h">
 
                         <div class="d-flex justify-content-end day_icon">
@@ -51,12 +54,12 @@
                     <div class="f">
                         <i>View chart for progress</i>
                     </div>
-                    </section>
+                </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
                 <div class="dashboard_s">
-                    <section class="wrapper">
+                    <div class="wrapper">
                     <div class="h">
 
                         <div class="d-flex justify-content-end user_icon">
@@ -73,12 +76,12 @@
                     <div class="f">
                         <i>Based on message activities</i>
                     </div>
-                    </section>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
                 <div class="dashboard_s">
-                    <section class="wrapper">
+                    <div class="wrapper">
                         <div class="h">
     
                             <div class="d-flex justify-content-end total_user_icon">
@@ -95,12 +98,12 @@
                         <div class="f">
                             <i>Out of total 20 possible users</i>
                         </div>
-                    </section>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-12 with-margin-col">
                 <div class="dashboard_s">
-                    <section class="wrapper">
+                    <div class="wrapper">
                     <div class="h">
 
                         <div class="d-flex justify-content-end message_icon">
@@ -119,7 +122,7 @@
                     <div class="f">
                         <i>Total messages in Contact dashboard</i>
                     </div>
-                    </section>
+                    </div>
                 </div>
             </div>
         </div>
@@ -127,12 +130,12 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
                 <div class="chart-container">
-                    <canvas id="top-user-chart" width="300" height="168.75"></canvas>
+                    <canvas id="top-user-chart" width="300" height="169"></canvas>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
                 <div class="chart-container">
-                    <canvas id="user-page-chart" width="300" height="168.75"></canvas>
+                    <canvas id="user-page-chart" width="300" height="169"></canvas>
                 </div>
             </div>
         </div>
@@ -140,11 +143,13 @@
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
                 <div class="chart-container">
-                    <canvas id="userperday-chart" width="300" height="168.75"></canvas>
+                    <canvas id="userperday-chart" width="300" height="169"></canvas>
                 </div>   
             </div>
             <div class="col-lg-6 col-md-6 col-sm-12 with-margin-col">
-                y
+                <div class="chart-container">
+                    <canvas id="buttons-page-chart" width="300" height="169"></canvas>
+                </div>
             </div>
         </div>
 
@@ -152,19 +157,233 @@
 
     <br>
 
-    <div class="container">
+    <div class="container form">
+        <h1 class="text-center">Contact messages</h1>
 
-            <div id="contact_carousel" class="carousel slide carousel-fade" data-ride="carousel">
-                
-            </div>
+        <div id="contact_carousel" class="carousel slide carousel-fade" data-ride="carousel">
+        </div>
     </div>
 
+    <br><br>
+
+    
+<div class="container form">
+    <h1 class="text-center">Form builder</h1>
+
+    <div class="container">
+
+        <div class="input-group form-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-question"></i></span>
+            </div>
+            <input type="text" class="form-control form-control-purple" placeholder="Type your question." id="form_question">
+        </div>
+
+        <br>
+
+        <select class="browser-default custom-select" id="input_type" onchange="updateFormContent(this.id, 'form_content')">
+            <option value="">&nbsp;</option>
+            <option value="dropdown">Dropdown</option>
+            <option value="single_check">Single Check</option>
+            <option value="multiple_check">Multiple Check</option>
+            <option value="input_text">Input Text</option>
+        </select>
+
+        <br><br>
+
+        <div class="form_content" id="form_content">
+
+        </div>
+
+        <br><br>
+
+        <div class="form-group">
+            <input type="submit" value="Update form" id="formbuilderBtn" class="btn login_btn">
+        </div>
+
+    </div>
+    
     <br><br><br>
+    <br><br><br>
+    <br><br><br>
+</div>
+
 
 </div>
 
-<script type="text/javascript" src='js/admin.js'></script>
+<script src='js/admin.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+
+<script>
+    
+    var htmlContent = "";
+
+    function updateFormContent(selectMenu_id, formContent_id){
+
+        var selectMenu = document.getElementById(selectMenu_id);
+        var formContent = document.getElementById(formContent_id);
+
+        formContent.innerHTML = "";
+
+        var selectedOption = selectMenu.value;
+
+        if (selectedOption == "dropdown") {
+
+            htmlContent = `
+            
+                <h5>Dropdown options:</h5>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend pred">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 1." id="dropdown_option1">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend pred">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 2." id="dropdown_option2">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend pred">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 3." id="dropdown_option3">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend pred">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 4." id="dropdown_option4">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend pred">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 5." id="dropdown_option5">
+                </div>
+            `;
+
+            formContent.innerHTML = htmlContent;
+
+        } else if (selectedOption == "single_check") {
+
+            htmlContent = `
+            
+                <h5>Single check options:</h5>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 1." id="single_check_option1">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 2." id="single_check_option2">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 3." id="single_check_option3">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 4." id="single_check_option4">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 5." id="single_check_option5">
+                </div>
+            `;
+
+            formContent.innerHTML = htmlContent;
+
+        } else if (selectedOption == "input_text") {
+
+            htmlContent = `
+            
+                <h5>Length of free text form input:</h5>
+                <select class="browser-default custom-select" id="input_form_textlength">
+                    <option selected value="short">Short Answer</option>
+                    <option value="long">Long Answer</option>
+                </select>
+            
+            `;
+            
+            formContent.innerHTML = htmlContent;
+
+        } else if (selectedOption == "multiple_check") {
+
+            htmlContent = `
+            
+                <h5>Multiple check options:</h5>
+
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 1." id="multiple_check_option1">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 2." id="multiple_check_option2">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 3." id="multiple_check_option3">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple" 
+                            placeholder="Option 4." id="multiple_check_option4">
+                </div>
+                <div class="input-group form-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-angle-right"></i></span>
+                    </div>
+                    <input type="text" class="form-control form-control-purple"
+                            placeholder="Option 5." id="multiple_check_option5">
+                </div>
+            `;
+
+            formContent.innerHTML = htmlContent;
+
+        }
+
+    }
+
+
+</script>
+
+
 
 
 </body>

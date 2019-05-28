@@ -2,14 +2,34 @@
 require_once 'idiorm.php';
 ORM::configure('sqlite:./db.sqlite');
 
-$user = $_POST["username"];
-$pass = $_POST["password"];
+if (isset($_POST['login'])) {
 
-//prevent mysql injection
-$user = stripcslashes($user);
-$pass = stripcslashes($pass);
+    if (empty($_POST['username']) || empty($_POST['password'])) {
 
-process_login($user, $pass);
+        header("location:home.html?Empty=Please complete the fields");
+    }
+    else {
+
+        $user = $_POST["username"];
+        $pass = $_POST["password"];
+
+        $var = process_login($user, $pass);
+    
+        if($var == $user) {
+    
+            session_start();
+            $_SESSION['username'] = $user;
+            header("location:chat.html");
+        }
+        else {
+    
+            header("location:home.html?Invalid=Username or password incorrect");
+        }
+    }
+
+} else {
+    echo 'Login not working.';
+}
 
 function process_login($user, $pass) {
 
@@ -27,7 +47,7 @@ function process_login($user, $pass) {
         }
     }
 
-    echo $found;
+    return $found;
 }
 
-
+?>

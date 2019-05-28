@@ -7,7 +7,10 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="home_time.php"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>
         Homepage
@@ -17,24 +20,34 @@
 </head>
 <body>
 
+<div class="main">
+
 <!-- navbar -->  
 <nav class="navbar navbar-expand-lg fixed-top">  
     <a class="nav-link" data-value="home" href="#">Home</a>
+    <form action="logout.php?logout" method="post">
+        <div class="form-group">
+            <input type="submit" name="logout" value="Logout" id="logout_btn" class="btn float-right">
+        </div>
+    </form>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
     <li class="nav-item">
-        <a class="nav-link" data-value="block" href="#">Block</a>
+        <a class="nav-link" data-value="block" href="#" onclick="addButtonString('0')">Block</a>
     </li>  
     <li class="nav-item">
-        <a class="nav-link " data-value="notice" href="#">Notice board</a>    
+        <a class="nav-link " data-value="notice" href="#" onclick="addButtonString('1')">Notice board</a>    
     </li>
     <li class="nav-item"> 
-        <a class="nav-link " data-value="news" href="#">News</a>
+        <a class="nav-link " data-value="news" href="#" onclick="addButtonString('2')">News</a>
     </li>   
     <li class="nav-item"> 
-        <a class="nav-link " data-value="contact" href="#">Contact</a>
+        <a class="nav-link " data-value="contact" href="#" onclick="addButtonString('3')">Contact</a>
+    </li>
+    <li class="nav-item"> 
+        <a class="nav-link " data-value="weeklyform" href="#" onclick="addButtonString('4')">Weelky form</a>
     </li> 
     <li>
         <a class="nav-link " data-value="admin" href="#"><i class="fas fa-user-cog"></i></a>                        
@@ -366,25 +379,28 @@
         </div>
 
         <div class="modal-body">
-            <form id="login_form">
+
+            <form action="process_login.php" method="post" id="login_form">
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                     </div>
-                    <input type="text" class="form-control form-control-purple" placeholder="username" id="login_username">
+                    <input type="text" class="form-control form-control-purple"
+                            name="username" placeholder="username" id="login_username">
                     
                 </div>
                 <div class="input-group form-group">
                     <div class="input-group-prepend">
                         <span class="input-group-text"><i class="fas fa-key"></i></span>
                     </div>
-                    <input type="password" class="form-control form-control-purple" placeholder="password" id="login_password">
+                    <input type="password" class="form-control form-control-purple"
+                            name="password" placeholder="password" id="login_password">
                 </div>
-                <!-- <div class="row align-items-center remember">
+                <div class="row align-items-center remember">
                     <input type="checkbox">Remember Me
-                </div> -->
+                </div>
                 <div class="form-group">
-                    <input type="submit" value="Login" id="login_btn" class="btn float-right login_btn" href="chat.html">
+                    <input type="submit" name="login" value="Login" id="login_btn" class="btn float-right login_btn">
                 </div>
             </form>
         </div>
@@ -538,7 +554,7 @@
                 of the inner perimeter plants, exterminators had been called to run a
                 cleaning procedure on the remaining grounds.</p>
                     
-                <p>Please contribute to the budget for this operation with <b><i>10 dollars</b></i>.
+                <p>Please contribute to the budget for this operation with <i><b>10 dollars</b></i>.
             </div>
           </div>
           <div class="carousel-item">
@@ -573,6 +589,7 @@
         <!--/.Controls-->
       </div>
       <!--/.Carousel Wrapper-->
+      </div>
 </div>
 
 <!--Contact Section-->
@@ -584,21 +601,21 @@
 				<div class="col-lg-4 col-md-4 col-sm-12">
                     <h3 class="text-center">Do not hesitate to contact for support or help.</h3>	
                     <div class="form-group">
-                        <input type="text" id="sender" class="form-control form-control-lg" placeholder="Name" name="">
+                        <input type="text" id="sender" class="form-control form-control-lg" placeholder="Name" name="sender">
                     </div>
                     <div class="form-group">
                         <input type="email" id="email" class="form-control form-control-lg" placeholder="Email" name="email">
                     </div>
                     <div class="form-group">
                         <textarea class="form-control form-control-lg" id="contact_message"
-                                id="contact_message" placeholder="Message"></textarea>
+                                                            placeholder="Message"></textarea>
                     </div>
-                    <input type="submit" class="btn text-center contact_btn" value="Send" name="">
+                    <input type="submit" class="btn text-center contact_btn" value="Send">
                 </div>
 				<div class="col-lg-8 col-md-8 col-sm-12 right">
                     <div class="mapouter">
                         <div class="gmap_canvas">
-                            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Manhattan%20W%2072nd&t=&z=15&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+                            <iframe width="600" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=Manhattan%20W%2072nd&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe>
                         </div>
                     </div>
 				</div>
@@ -607,8 +624,20 @@
 	</div>
 </div>
 
+<!--Form section-->
+<div class="contact-form contact" id="weeklyform">
+        <div class="container">
+        <h1 class="text-center" style="padding-top:20px">Weekly form</h1>
+            <form id="weekly_form">
 
-<script type="text/javascript" src='js/home.js'></script>
+                
+
+            </form>
+        </div>
+    </div>
+
+
+<script src='js/home.js'></script>
 
 <script> 
     function initMap() { 
@@ -628,7 +657,10 @@
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBznUg7kBX4KRf8hKdfE191BQpqeTRv7ps&callback=initMap">
 </script>
     
-<script type="text/javascript" src='js/home.js'></script>
+<script src='js/home.js'></script>
+
+</div>
+
 
 </body>
 </html>

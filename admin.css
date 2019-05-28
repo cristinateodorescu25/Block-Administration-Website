@@ -177,6 +177,10 @@ body {
     width: 100%
 }
 
+/* ==================================================
+   Contact Messages
+================================================== */
+
 .carousel-item:after {
     content:"";
     display:block;
@@ -204,3 +208,31 @@ body {
     height: 100%;
 }
 
+
+/* ==================================================
+   Form builder
+================================================== */
+
+.form h1 {
+	color:#F97300;
+	margin: 2em;	
+}
+
+.input-group-prepend span {
+    width: 45px;
+    background-color: rgb(0, 108, 249);
+    color: white;
+    border:0 !important;
+}
+
+.login_btn {
+    background-color: rgb(0, 108, 249);
+    color: white;
+    width: 150px;
+    display: block; margin: 0 auto;
+}
+
+.login_btn:hover {
+    background-color: rgb(1, 83, 190);
+    color: rgba(216, 216, 216, 0.774);
+}

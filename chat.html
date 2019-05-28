@@ -7,6 +7,9 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script> 
+
+    <script src="chat_time.php"></script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>
         Chat
@@ -16,15 +19,18 @@
 </head>
 <body>
 
-<!-- navbar -->
-<nav class="navbar navbar-expand-lg fixed-top">  
-    <!-- <a class="nav-link" data-value="home" href="home.html">Home</a> -->
+<nav class="navbar navbar-expand-lg fixed-top">
+    <form action="logout.php?logout" method="post">
+        <div class="form-group">
+            <input type="submit" name="logout" value="Logout" id="logout_btn" class="btn float-right">
+        </div>
+    </form>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">  
     <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse " id="navbarSupportedContent">     <ul class="navbar-nav mr-4">
     <li>
-        <a class="nav-link" data-value="home" href="home.html">Home</a>
+        <a class="nav-link" data-value="home" href="home.php">Home</a>
     </li>
     <li>
         <a class="nav-link " data-value="admin" href="#"><i class="fas fa-user-cog"></i></a>                        
@@ -37,7 +43,7 @@
         <div class="row h-100">
             <div class="col-md-4 col-xl-4 chat"><div class="card mb-sm-3 mb-md-0 contacts_card">
 
-                <div class="card-header">
+                <div class="card-header search_header">
                     <div class="input-group form-group">
                             <div class="input-group-prepend">
                                     <span class="input-group-text search_button"><i class="fas fa-search"></i></span>
@@ -47,108 +53,36 @@
                 </div>
 
                 <div class="card-body contacts_body">
-                    <ui class="contacts">
-                    <li class="active">
-                        <div class="d-flex bd-highlight">
-                            <div class="img_cont">
-                                <img src="11.jpg" class="rounded-circle user_img">
-                            </div>
-                            <div class="user_info">
-                                <span>Flat 11</span>
-                                <p>Last message</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex bd-highlight">
-                            <div class="img_cont">
-                                <img src="16.jpg" class="rounded-circle user_img">
-                            </div>
-                            <div class="user_info">
-                                <span>Flat 16</span>
-                                <p>Last message</p>
-                            </div>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="d-flex bd-highlight">
-                            <div class="img_cont">
-                                <img src="18.jpg" class="rounded-circle user_img">
-                            </div>
-                            <div class="user_info">
-                                <span>Flat 18</span>
-                                <p>Last message</p>
-                            </div>
-                        </div>
-                    </li>
-                    </ui>
+                    <ul class="contacts" id="contacts">
+
+                    </ul>
                 </div>
                
             </div></div>
             <div class="col-md-8 col-xl-8 chat">
                 <div class="card">
-                    <div class="card-header msg_head">
-                        <div class="d-flex bd-highlight">
-                            <div class="img_cont">
-                                <img src="18.jpg" class="rounded-circle user_img">
-                            </div>
-                            <div class="user_info">
-                                <span>Flat 18</span>
-                                <p>30 Messages</p>
-                            </div>
-                        </div>
+                    <div class="card-header msg_head" id="card-header">
+
                     </div>
-                    <div class="card-body message_card_body">
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="16.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="message">
-                                Test message Test message Test message Test message
-                                <span class="message_time">time | date</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="message_sent">
-                                    Test message sent by meTest message sent by meTest message sent by meTest message sent by me
-                                    <span class="message_time_sent">time | date</span>
-                            </div>
-                            <div class="img_cont_msg">
-                        <img src="10.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-start mb-4">
-                            <div class="img_cont_msg">
-                                <img src="16.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                            <div class="message">
-                                    Test message Test message Test message Test message
-                                <span class="message_time">time | date</span>
-                            </div>
-                        </div>
-                        <div class="d-flex justify-content-end mb-4">
-                            <div class="message_sent">
-                                    Test message sent by meTest message sent by meTest message Test message sent by meTest message sent by meTest message 
-                                <span class="message_time_sent">time | date</span>
-                            </div>
-                            <div class="img_cont_msg">
-                        <img src="10.jpg" class="rounded-circle user_img_msg">
-                            </div>
-                        </div>
+                    <div class="card-body message_card_body" id="card-body">
                         
                     </div>
                     <div class="card-footer">
-                        <div class="input-group">
-                            <textarea name="" class="form-control type_message" placeholder="Text Message"></textarea>
+                        <div class="input-group" id="message_form">
+                            <textarea name="message_text" id="message_text" class="form-control type_message" placeholder="Text Message"></textarea>
                             <div class="input-group-append">
-                                <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                                <span class="input-group-text send_btn" id="send_button"><i class="fas fa-location-arrow"></i></span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
+
+
+
+<script src='js/chat.js'></script>
 
 </body>
 </html>

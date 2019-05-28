@@ -11,17 +11,42 @@ $(".navbar a").click(function(){
 $('.carousel').carousel({
     interval: false
 });
-  
+
+/* ==================================================
+    Probability
+================================================== */
+
+function addButtonString(string) {
+
+
+    // window.onload = function() {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+        };
+    
+        var data = new FormData();
+        data.append('string', string + "");
+    
+    console.log(string);
+
+        request.open("POST", './generate_probability.php', false);
+        console.log('deschis?')
+        request.send(data);
+
+        // var sth = JSON.parse(request.responseText);
+        console.log(request.responseText);
+    // }
+}
+
 
 window.onload = function() {
     var request = new XMLHttpRequest();
     request.onreadystatechange = function() {
         // console.log(request);
     };
-    request.open("GET", "./get_notice_board.php", false); //true = async
-    request.send();
 
-    // console.log(request.responseText);
+    request.open("GET", "./get_notice_board.php", false);
+    request.send();
 
     allFlats = JSON.parse(request.responseText);
 
@@ -39,60 +64,38 @@ window.onload = function() {
         
     noticeBoard_Table.innerHTML += htmlTableText;
 
+    /* ==================================================
+        Contact Form
+    ================================================== */
+
     document.getElementById("contact_form").onsubmit = function (e) {
-       //stop form submission
-       e.preventDefault();
-       console.log("Form submission here");
-       //ajax call here
-       var sender = document.getElementById('sender').value;
-       var email = document.getElementById('email').value;
-       var message = document.getElementById('contact_message').value;
-    //    console.log(message);
+        //stop form submission
+        e.preventDefault();
+        console.log("Form submission here");
+        //ajax call here
+        var sender = document.getElementById('sender').value;
+        var email = document.getElementById('email').value;
+        var message = document.getElementById('contact_message').value;
+     //    console.log(message);
+ 
+        create_contact_message(sender, email, message);
+     };
+ 
+     function create_contact_message(s, e, m) {
+         var request = new XMLHttpRequest();
+ 
+         var data = new FormData();
+         data.append('sender', s);
+         data.append('email', e);
+         data.append('message', m);
+ 
+         request.open("POST", './generate_contact_message.php', false);
+         request.send(data);
+     }
 
-       create_contact_message(sender, email, message);
-    };
-
-    function create_contact_message(s, e, m) {
-        var request = new XMLHttpRequest();
-
-        var data = new FormData();
-        data.append('sender', s);
-        data.append('email', e);
-        data.append('message', m);
-
-        request.open("POST", './generate_contact_message.php', false);
-        request.send(data);
-    }
-
-    document.getElementById("login_form").onsubmit = function (e) {
-       //stop form submission
-       e.preventDefault();
-
-       //ajax call here
-       var username = document.getElementById('login_username').value;
-       var password = document.getElementById('login_password').value;
-
-       process_login(username, password);
-    };
-
-    function process_login(u, p) {
-        var request = new XMLHttpRequest();
-
-        var data = new FormData();
-        data.append('username', u);
-        data.append('password', p);
-
-        request.open("POST", './process_login.php', false);
-
-        request.onreadystatechange = function() {
-            if (request.readyState == 4 && request.status == 200) {
-                console.log(request.responseText);
-            }
-        }
-
-        request.send(data);
-
-    }
+    /* ==================================================
+        Signup Form
+    ================================================== */
 
     document.getElementById("signup_form").onsubmit = function (e) {
         //stop form submission
@@ -128,6 +131,108 @@ window.onload = function() {
 
         request.send(data);
  
-     }
+    }
+
+
+     /* ==================================================
+        Get Form Builder
+        ================================================== */
+
+        request.open("GET", "./get_form.php", false);
+        request.send();
+
+        formEntries = JSON.parse(request.responseText);
+        console.log(formEntries);
+
+
+        let weeklyForm = document.getElementById("weekly_form");
+        let formHTML = '';
+
+        for (let f of formEntries) {
+
+            formHTML += `
+            <div class="form-group">
+                <label for="formGroupExampleInput">${f.question}</label>`;
+        
+            if (f.type == "input-text") {
+               
+                if (f.shortlong == "short") {
+
+                    formHTML += `
+                        <input type="text" class="form-control texti" placeholder="Type your answer"></input>
+                        </div>`;
+
+                } else {
+                
+                    formHTML += `
+                        <textarea class="form-control texti" rows="3"></textarea>
+                        </div>`;
+
+                }
+
+            } else if (f.type == "dropdown") {
+
+                formHTML += `
+                <div class="select">
+                    <select name="sel">
+                    <option>${f.o1}</option>
+                    <option>${f.o2}</option>
+                    <option>${f.o3}</option>
+                    <option>${f.o4}</option>
+                    <option>${f.o5}</option>
+                    </select>
+                </div>`;
+
+            } else if (f.type == "single_check") {
+
+                formHTML += `
+                    <label class="rad">${f.o1}
+                    <input type="radio" name="optradio">
+                    <span class="checkmark"></span>
+                    </label>
+                    <label class="rad">${f.o2}
+                    <input type="radio" name="optradio">
+                    <span class="checkmark"></span>
+                    </label>
+                    <label class="rad">${f.o3}
+                    <input type="radio" name="optradio">
+                    <span class="checkmark"></span>
+                    </label>
+                    <label class="rad">${f.o4}
+                    <input type="radio" name="optradio">
+                    <span class="checkmark"></span>
+                    </label>
+                    <label class="rad">${f.o5}
+                    <input type="radio" name="optradio">
+                    <span class="checkmark"></span>
+                    </label>`;          
+
+            } else if (f.type == "multiple_check") {
+
+                formHTML += `
+                    <label class="rad2">${f.o1}
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="rad2">${f.o2}
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="rad2">${f.o3}
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="rad2">${f.o4}
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>
+                    <label class="rad2">${f.o5}
+                        <input type="checkbox">
+                        <span class="checkmark2"></span>
+                    </label>`;
+            }
+        }
+
+        weeklyForm.innerHTML = formHTML;
 
 }
